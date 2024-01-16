@@ -7,7 +7,7 @@ blueprint:
       name: Button
       description: The button to configure.
       selector: 
-        device:
+        entity:
           integration: mqtt
           domain:
             - sensor
