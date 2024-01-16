@@ -9,8 +9,7 @@ blueprint:
       selector: 
         entity:
           integration: mqtt
-          domain:
-            - sensor
+          domain: sensor
           multiple: false
     press_action:
       name: Press Action
