@@ -25,7 +25,7 @@ blueprint:
         action: {}
     long_press_action:
       name: Long Press Action
-      description: Action to perform on Hold.
+      description: Action to perform on Long Press.
       default: []
       selector:
         action: {}
@@ -33,11 +33,11 @@ mode: restart
 max_exceeded: silent
 trigger:
   platform: state
-  entity_id: !input action_sensor
+  entity_id: !input button_id
 condition:
 - condition: template
   value_template: '{{ (trigger.to_state.attributes.action if trigger.to_state.state == ""
-      else trigger.to_state.state) in ("single","double","hold","release")
+      else trigger.to_state.state) in ("single","double","hold")
     }}'
 action:
 - variables:
