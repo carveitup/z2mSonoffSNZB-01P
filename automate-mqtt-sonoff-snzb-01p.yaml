@@ -8,8 +8,9 @@ blueprint:
       description: The button to configure.
       selector: mqtt
         device:
-          manufacturer: eWeLink
-          model: SNZB-01P
+          integration: mqtt
+          domain:
+            - sensor
           multiple: false
     press_action:
       name: Press Action
