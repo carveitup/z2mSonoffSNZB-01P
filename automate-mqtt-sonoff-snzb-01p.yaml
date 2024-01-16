@@ -6,7 +6,7 @@ blueprint:
     button_id:
       name: Button
       description: The button to configure.
-      selector: mqtt
+      selector: 
         device:
           integration: mqtt
           domain:
