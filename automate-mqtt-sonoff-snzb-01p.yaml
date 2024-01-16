@@ -1,0 +1,56 @@
+blueprint:
+  name: Sonoff Zigbee wireless Button SNZB-01P
+  description: Setup actions for three functions of the SONOFF Zigbee button with Press, Double Press, and long press.
+  domain: automation
+  input:
+    button_id:
+      name: Button
+      description: The button to configure.
+      selector: mqtt
+        device:
+          manufacturer: eWeLink
+          model: SNZB-01P
+          multiple: false
+    press_action:
+      name: Press Action
+      description: Action to perform on Press.
+      default: []
+      selector: 
+        action: {}
+    double_press_action:
+      name: Double Press Action
+      description: Action to perform on Double Press.
+      default: []
+      selector:
+        action: {}
+    long_press_action:
+      name: Long Press Action
+      description: Action to perform on Hold.
+      default: []
+      selector:
+        action: {}
+  source_url: https://community.home-assistant.io/t/zha-sonoff-snzb-01p-wireless-button-short-double-long-press-action/635422
+variables:
+  button_id: !input button_id
+  press_action: !input press_action
+  double_press_action: !input double_press_action
+  long_press_action: !input long_press_action
+trigger:
+- platform: event
+  event_type: zha_event
+  event_data:
+    device_id: !input button_id
+action:
+- choose:
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.event.data.command == "toggle" }}'
+    sequence: !input press_action
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.event.data.command == "on" }}'
+    sequence: !input double_press_action
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.event.data.command == "off" }}'
+    sequence: !input long_press_action
