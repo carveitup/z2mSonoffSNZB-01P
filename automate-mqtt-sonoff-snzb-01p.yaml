@@ -46,10 +46,10 @@ action:
 - choose:
   - conditions:
     - '{{ command == ''single'' }}'
-    sequence: !input press_single
+    sequence: !input press_action
   - conditions:
     - '{{ command == ''double'' }}'
-    sequence: !input press_double
+    sequence: !input double_press_action
   - conditions:
     - '{{ command == ''hold'' }}'
-    sequence: !input press_hold
+    sequence: !input long_press_action
